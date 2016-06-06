@@ -86,7 +86,7 @@ apply plugin: 'com.neenbedankt.android-apt'
         compile "com.google.code.gson:gson:$rootProject.gsonVersion"
 
         //Image
-        compile "com.squareup.picasso:picasso:$rootProject.picassoVersion"
+        compile "com.squareup.picasso:picasso:$rootProject.picassoVersion"\
 
         // Dagger and Butterknife dependencies
         apt "com.google.dagger:dagger-compiler:$rootProject.daggerVersion"
