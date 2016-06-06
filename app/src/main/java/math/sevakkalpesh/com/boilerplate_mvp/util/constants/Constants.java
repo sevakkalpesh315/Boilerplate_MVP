@@ -9,5 +9,5 @@ public class Constants {
         // Empty private constructor
     }
 
-    public static final String KEY_MOVIE_DETAILS = "MovieDetails";
+    public static final String BASE_URL="https://gist.githubusercontent.com/hart88";
 }
