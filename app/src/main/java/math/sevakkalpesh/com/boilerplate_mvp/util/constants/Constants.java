@@ -1,4 +1,4 @@
-package math.sevakkalpesh.com.boilerplate_mvp.util;
+package math.sevakkalpesh.com.boilerplate_mvp.util.constants;
 
 /**
  * @author jlmd

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package math.sevakkalpesh.com.boilerplate_mvp.util;
+package math.sevakkalpesh.com.boilerplate_mvp.util.testing;
 
 import android.support.test.espresso.IdlingResource;
 

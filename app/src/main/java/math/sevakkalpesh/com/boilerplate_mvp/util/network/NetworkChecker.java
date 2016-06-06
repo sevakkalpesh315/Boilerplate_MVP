@@ -1,4 +1,4 @@
-package math.sevakkalpesh.com.boilerplate_mvp.util;
+package math.sevakkalpesh.com.boilerplate_mvp.util.network;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

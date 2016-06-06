@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package math.sevakkalpesh.com.boilerplate_mvp.util;
+package math.sevakkalpesh.com.boilerplate_mvp.util.recyclerview;
 
 import android.content.Context;
 import android.graphics.Rect;

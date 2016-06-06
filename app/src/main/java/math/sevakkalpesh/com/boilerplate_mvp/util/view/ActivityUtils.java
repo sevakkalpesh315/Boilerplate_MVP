@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package math.sevakkalpesh.com.boilerplate_mvp.util;
+package math.sevakkalpesh.com.boilerplate_mvp.util.view;
 
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
