@@ -17,10 +17,9 @@ package math.sevakkalpesh.com.boilerplate_mvp.util.recyclerview;
 
 import android.content.Context;
 import android.graphics.Rect;
+import android.support.annotation.DimenRes;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-
-import math.sevakkalpesh.com.boilerplate_mvp.R;
 
 
 /**
@@ -30,19 +29,16 @@ import math.sevakkalpesh.com.boilerplate_mvp.R;
  *
  * by Dave Smith at: https://github.com/devunwired/recyclerview-playground
  */
-public class RecyclerInsetsDecoration extends RecyclerView.ItemDecoration {
+public class RecyclerInsetsDecoration extends RecyclerView.ItemDecoration{
 
-    private int mInsets;
+    private int margin;
 
-    public RecyclerInsetsDecoration(Context context) {
-        mInsets = context.getResources().getDimensionPixelSize(R.dimen.insets);
+    public RecyclerInsetsDecoration(Context context, @DimenRes int dimenRes){
+        margin = context.getResources().getDimensionPixelSize(dimenRes);
     }
 
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-
-        //We can supply forced insets for each item view here in the Rect
-        super.getItemOffsets(outRect, view, parent, state);
-        outRect.set(mInsets, mInsets, mInsets, mInsets);
+        outRect.set(0, margin, 0, margin);
     }
 }
