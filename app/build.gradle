@@ -119,6 +119,7 @@ apply plugin: 'com.neenbedankt.android-apt'
         androidTestCompile "com.android.support:support-v4:$rootProject.supportLibraryVersion"
         androidTestCompile "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
 
+        compile 'org.jetbrains:annotations:13.0'
     }
 
 

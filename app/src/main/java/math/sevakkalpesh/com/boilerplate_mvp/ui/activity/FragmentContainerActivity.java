@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import butterknife.ButterKnife;
+import math.sevakkalpesh.com.boilerplate_mvp.MyApp;
 import math.sevakkalpesh.com.boilerplate_mvp.R;
 
 /**
@@ -54,7 +55,9 @@ public abstract class FragmentContainerActivity extends AppCompatActivity {
     }
     private void injectDependencies()
     {
-      //  ((AppApplication) getApplicationContext()).inject(this);
+        ((MyApp) getApplication()).getApiComponent().inject(FragmentContainerActivity.this);
+
+        //  ((AppApplication) getApplicationContext()).inject(this);
     }
 
 

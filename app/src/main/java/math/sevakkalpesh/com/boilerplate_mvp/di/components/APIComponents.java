@@ -1,9 +1,12 @@
 package math.sevakkalpesh.com.boilerplate_mvp.di.components;
 
+import android.support.v4.app.Fragment;
+
 import dagger.Component;
+import math.sevakkalpesh.com.boilerplate_mvp.CakeList.CakeListImplPresenter;
 import math.sevakkalpesh.com.boilerplate_mvp.di.modules.APIModule;
 import math.sevakkalpesh.com.boilerplate_mvp.di.scopes.UserScope;
-import math.sevakkalpesh.com.boilerplate_mvp.ui.activity.MainActivity;
+import math.sevakkalpesh.com.boilerplate_mvp.ui.activity.FragmentContainerActivity;
 
 
 /**
@@ -14,6 +17,9 @@ import math.sevakkalpesh.com.boilerplate_mvp.ui.activity.MainActivity;
     @Component(dependencies =NetComponent.class, modules = APIModule.class)
     public interface APIComponents {
 
-    void inject(MainActivity activity);
+    void inject(FragmentContainerActivity activity);
+    void inject(Fragment fragment);
+    void inject(CakeListImplPresenter cakeListImplPresenter);
+
 
 }
