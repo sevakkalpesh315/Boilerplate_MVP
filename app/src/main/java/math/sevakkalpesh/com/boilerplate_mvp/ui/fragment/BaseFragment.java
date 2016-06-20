@@ -50,8 +50,9 @@ public abstract class BaseFragment extends Fragment {
    * Replace every field annotated using @Inject annotation with the provided dependency specified
    * inside a Dagger module value.
    */
-  private void injectDependencies() {
+  public void injectDependencies() {
    // ((AppApplication) getApplicationContext()).inject(this);
+
   }
 
   /**
@@ -60,19 +61,19 @@ public abstract class BaseFragment extends Fragment {
    *
    * @param view to extract each widget injected in the fragment.
    */
-  private void bindViews(final View view) {
-    ButterKnife.bind(this, view);
+  public void bindViews(final View view) {
+    ButterKnife.inject(this, view);
   }
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
     return inflater.inflate(getFragmentLayout(), container, false);
   }
 
   @Override
   public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
-    bindViews(view);
     initView(view, savedInstanceState);
   }
 
@@ -80,6 +81,7 @@ public abstract class BaseFragment extends Fragment {
    * Use this method to initialize view components.
    */
   public void initView(View view, Bundle savedInstanceState) {
+    bindViews(view);
   }
 
   @Override
@@ -88,8 +90,8 @@ public abstract class BaseFragment extends Fragment {
     super.onDestroyView();
   }
 
-  private void unbindViews() {
-    ButterKnife.unbind(this);
+  public void unbindViews() {
+    //ButterKnife.unbind(this);
   }
 
 

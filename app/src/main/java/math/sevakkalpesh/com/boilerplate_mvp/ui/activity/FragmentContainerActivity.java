@@ -66,10 +66,10 @@ public abstract class FragmentContainerActivity extends AppCompatActivity {
      * value.
      */
     private void bindViews() {
-        ButterKnife.bind(this);
+        ButterKnife.inject(this);
     }
 
     private void unbindView(){
-        ButterKnife.unbind(this);
+        //ButterKnife.unbind(this);
     }
 }
