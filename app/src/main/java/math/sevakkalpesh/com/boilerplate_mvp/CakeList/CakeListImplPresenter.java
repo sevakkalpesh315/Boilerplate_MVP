@@ -44,7 +44,7 @@ public class CakeListImplPresenter implements CakeListContract.IPresenter {
     public void displayList() {
 
         iView.showProgress();
-
+        iView.showSwipeRefresh();
         cakeApi.getCakes()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -53,14 +53,16 @@ public class CakeListImplPresenter implements CakeListContract.IPresenter {
                     public void onNext(List<Cake_model> cake_models) {
                         super.onNext(cake_models);
                         iView.showCakesAdapter(cake_models);
+                        iView.notifyDataChanged();
                         iView.dismissProgress();
-
+                        iView.dismissSwipeRefresh();
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         super.onError(e);
                 iView.dismissProgress();
+                        iView.dismissSwipeRefresh();
                     }
                 });
     }

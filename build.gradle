@@ -48,7 +48,7 @@ ext {
     picassoVersion='2.5.2'
 
     // App dependencies
-    supportLibraryVersion = '23.0.0'
+    supportLibraryVersion = '23.0.1'
     guavaVersion = '18.0'
     junitVersion = '4.12'
     mockitoVersion = '1.10.19'
