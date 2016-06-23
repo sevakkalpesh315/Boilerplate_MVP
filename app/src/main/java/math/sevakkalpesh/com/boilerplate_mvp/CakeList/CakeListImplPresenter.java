@@ -24,8 +24,6 @@ public class CakeListImplPresenter implements CakeListContract.IPresenter {
     {
         this.iView = mUserView;
         this.cakeApi=cake_api;
-
-
     }
 
     public CakeListImplPresenter(@NonNull CakeListContract.IView mUserView)
