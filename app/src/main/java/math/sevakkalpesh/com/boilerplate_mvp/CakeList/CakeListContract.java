@@ -26,7 +26,8 @@ public interface CakeListContract {
      interface IPresenter extends BasePresenter
     {
         void displayList();
-
+        void onStop();
+        void onResume();
     }
 
 

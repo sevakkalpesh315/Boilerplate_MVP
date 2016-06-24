@@ -3,6 +3,7 @@ package math.sevakkalpesh.com.boilerplate_mvp.CakeList;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
@@ -37,8 +38,6 @@ public class CakeListFragment extends BaseFragment implements CakeListContract.I
 
     @InjectView(R.id.recyclerList)
     RecyclerView mRecyclerView;
-    View v;
-
 
 
     private CakesAdapter mAdapter;
@@ -51,6 +50,11 @@ public class CakeListFragment extends BaseFragment implements CakeListContract.I
         return new CakeListFragment();
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        cakeListImplPresenter.onStop();
+    }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -102,11 +106,17 @@ public class CakeListFragment extends BaseFragment implements CakeListContract.I
     public void onResume() {
         super.onResume();
         cakeListImplPresenter.start();
+        cakeListImplPresenter.onResume();
+
     }
 
     public void initializeRecycler(View v){
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
         mRecyclerView.addItemDecoration(new RecyclerInsetsDecoration(getContext(), R.dimen.spacing_medium));
+        RecyclerView.ItemAnimator itemAnimator = new DefaultItemAnimator();
+        itemAnimator.setAddDuration(1000);
+        itemAnimator.setRemoveDuration(1000);
+        mRecyclerView.setItemAnimator(itemAnimator);
     }
 
     public void initializeSwipeToRefresh(View v ){

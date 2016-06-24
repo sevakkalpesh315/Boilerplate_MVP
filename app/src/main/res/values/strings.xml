@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Boilerplate_MVP</string>
+    <string name="dialog_action_ok">OK</string>
+    <string name="dialog_action_cancel">Cancel</string>
+    <string name="dialog_error_title">Sorry</string>
+
+    <string name="empty_cakes">There aren\'t any cakes</string>
+    <string name="error_loading_cakes">There was a problem loading the cakes</string>
 </resources>
