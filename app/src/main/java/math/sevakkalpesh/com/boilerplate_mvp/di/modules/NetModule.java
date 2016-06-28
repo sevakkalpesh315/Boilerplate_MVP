@@ -4,24 +4,26 @@ import android.app.Application;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import com.google.gson.FieldNamingPolicy;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.squareup.okhttp.Cache;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.logging.HttpLoggingInterceptor;
+import java.io.IOException;
 
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import retrofit.RestAdapter;
-import retrofit.client.OkClient;
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 
 @Module
 public class NetModule {
 
     String mBaseUrl;
+    private OkHttpClient okHttpClient;
 
     public NetModule(String baseUrl) {
         this.mBaseUrl = baseUrl;
@@ -33,7 +35,7 @@ public class NetModule {
         return PreferenceManager.getDefaultSharedPreferences(application);
     }
 
-    @Provides
+ /*   @Provides
     @Singleton
     Cache provideOkHttpCache(Application application) {
         int cacheSize = 10 * 1024 * 1024; // 10 MiB
@@ -65,12 +67,63 @@ public class NetModule {
     @Singleton
     RestAdapter provideRetrofit(OkHttpClient okhttp) {
 
-        RestAdapter retrofit = new RestAdapter.Builder()
+
+      /*  RestAdapter retrofit = new RestAdapter.Builder()
                 //.addConverterFactory(GsonConverterFactory.create(gson))
                 .setEndpoint(mBaseUrl)
                 .setLogLevel(RestAdapter.LogLevel.FULL)
                 .setClient(new OkClient(okhttp))
                 .build();
         return retrofit;
+
     }
+    */
+    /**
+     * Method to build and return an OkHttpClient so we can set/get
+     * headers quickly and efficiently.
+     * @return
+     */
+    @Provides
+    @Singleton
+    public OkHttpClient buildClient(){
+
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+
+        builder.addInterceptor(new Interceptor() {
+            @Override
+            public Response intercept(Chain chain) throws IOException {
+                Response response = chain.proceed(chain.request());
+                // Do anything with response here
+                //if we ant to grab a specific cookie or something..
+                return response;
+            }
+        });
+
+        builder.addInterceptor(new Interceptor() {
+            @Override
+            public Response intercept(Chain chain) throws IOException {
+                //this is where we will add whatever we want to our request headers.
+                Request request = chain.request().newBuilder().addHeader("Accept", "application/json").build();
+                return chain.proceed(request);
+            }
+        });
+
+        return  builder.build();
+    }
+
+    @Provides
+    @Singleton
+    Retrofit provideRetrofit() {
+        okHttpClient = buildClient();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(mBaseUrl)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .client(okHttpClient)
+                .build();
+        return retrofit;
+
+
+    }
+
 }

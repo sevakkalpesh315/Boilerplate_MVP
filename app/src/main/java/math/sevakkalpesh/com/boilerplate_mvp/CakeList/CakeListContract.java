@@ -19,7 +19,7 @@ public interface CakeListContract {
          void dismissSwipeRefresh();
          void msgDownloadComplete();
          void showError();
-         void showCakesAdapter(List<Cake_model> cake_models);
+         void showCakesAdapter(List<Cake_model> cakes);
          void notifyDataChanged();
     }
 
