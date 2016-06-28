@@ -17,6 +17,7 @@ import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import rx.schedulers.Schedulers;
 
 
 @Module
@@ -118,7 +119,7 @@ public class NetModule {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(mBaseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()))
                 .client(okHttpClient)
                 .build();
         return retrofit;
