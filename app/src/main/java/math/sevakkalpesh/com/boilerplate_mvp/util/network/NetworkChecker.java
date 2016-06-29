@@ -14,4 +14,24 @@ public class NetworkChecker {
 
         return activeNetwork != null;
     }
+
+
+   public static String getErrorMessage(Throwable e) {
+        RetrofitException retrofitError;
+        if (e instanceof RetrofitException) {
+            retrofitError = ((RetrofitException) e);
+            if (retrofitError.getKind() == RetrofitException.Kind.NETWORK) {
+                return "Network is down!";
+            }
+            if (retrofitError.getKind() == RetrofitException.Kind.HTTP) {
+                return "A non-200 HTTP status code was received from the server e.g. 502, 503, etc...";
+            }
+
+            if (retrofitError.getKind() == RetrofitException.Kind.UNEXPECTED) {
+                return "An internal error occurred while attempting to execute a request.";
+            }
+        }
+        return "other";
+    }
+
 }

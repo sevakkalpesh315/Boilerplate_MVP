@@ -4,10 +4,13 @@ import android.support.annotation.NonNull;
 
 import java.util.List;
 
+import math.sevakkalpesh.com.boilerplate_mvp.MyApp;
 import math.sevakkalpesh.com.boilerplate_mvp.model.Cake_model;
 import math.sevakkalpesh.com.boilerplate_mvp.model.observables.Cake_API;
+import math.sevakkalpesh.com.boilerplate_mvp.util.network.NetworkChecker;
 import math.sevakkalpesh.com.boilerplate_mvp.util.network.RxUtils;
 import math.sevakkalpesh.com.boilerplate_mvp.util.network.SimpleObserver;
+import math.sevakkalpesh.com.boilerplate_mvp.util.view.ToastUtils;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
@@ -46,6 +49,9 @@ public class CakeListImplPresenter implements CakeListContract.IPresenter {
 
     }
 
+
+
+
     @Override
     public void displayList() {
 
@@ -68,12 +74,39 @@ public class CakeListImplPresenter implements CakeListContract.IPresenter {
                         iView.dismissSwipeRefresh();
                     }
 
+
                     @Override
-                    public void onError(Throwable e) {
-                        super.onError(e);
+                    public void onError(Throwable throwable) {
+                        super.onError(throwable);
                         iView.dismissProgress();
                         iView.dismissSwipeRefresh();
+
+
+                        ToastUtils.showError( NetworkChecker.getErrorMessage(throwable), MyApp.getAppContext());
+
+   //http://bytes.babbel.com/en/articles/2016-03-16-retrofit2-rxjava-error-handling.html
+/*
+
+                        if(throwable instanceof IOException) {
+                           //A network or conversion error happened
+                            ToastUtils.showError(" IOException", MyApp.getAppContext());
+
+                        }
+                        if(error.getKind()== RetrofitException.Kind.NETWORK) {
+                            //A network or conversion error happened
+
+                            ToastUtils.showError("Network is down!", MyApp.getAppContext());
+
+                        }
+                        if(error.getKind()== RetrofitException.Kind.UNEXPECTED) {
+                            //A network or conversion error happened
+                            ToastUtils.showError("An internal error occurred while attempting to execute a request.", MyApp.getAppContext());
+
+                        }
+
+*/
                     }
+
                 }));
     }
 
